@@ -12,8 +12,20 @@ import java.util.List;
 public class CategoryController {
 
     @RequestMapping(path = "categories")
-    public List<Category> getAll(){
-        List<Category> categories =  new ArrayList<>();
+    public List<Category> getAll() {
+        List<Category> categories = new ArrayList<>();
+        return categories;
+    }
+
+    @RequestMapping(path = "categories/{id}")
+    public Category findById(@PathVariable int id) {
+        List<Category> categories = getCategories();
+        Category foundCategory = categories.stream().filter(c -> c.getCategoryId() == id).findFirst().orElse(null);
+        return foundCategory;
+    }
+
+    private static List<Category> getCategories() {
+        List<Category> categories = new ArrayList<>();
 
         categories.add(new Category(1, "Electronics"));
         categories.add(new Category(2, "Clothing"));
@@ -28,8 +40,5 @@ public class CategoryController {
 
         return categories;
     }
-@RequestMapping(path = "categories/{id}")
-    public Category findById(@PathVariable int id){
-
-    }
 }
+
