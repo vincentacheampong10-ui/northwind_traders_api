@@ -1,8 +1,10 @@
 package com.pluralsight.NorthwindTradersAPI.controller;
 
 import com.pluralsight.NorthwindTradersAPI.data.ProductDao;
+import com.pluralsight.NorthwindTradersAPI.model.Category;
 import com.pluralsight.NorthwindTradersAPI.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,4 +23,8 @@ public class ProductController {
         return products;
     }
 
+    @RequestMapping(path = "products/{id}")
+    public Product findById(@PathVariable int id) {
+        return productDao.getById(id);
+    }
 }
